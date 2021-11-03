@@ -1,0 +1,29 @@
+{
+    "name": "tokenjenny/flarum-ext-web3",
+    "description": "Allow Flarum to interact with Web3",
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "TJ",
+            "email": "info@tokenjenny.one"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "TokenJenny\\Web3\\": "src/" }
+    },
+    "require": {
+        "flarum/core": "^1.1",
+        "pelieth/laravel-ecrecover": "@dev"
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Web3",
+            "icon": {
+                "name": "fab fa-ethereum",
+                "backgroundColor": "#fbbf24",
+                "color": "#fff"
+            }
+        }
+    }
+}

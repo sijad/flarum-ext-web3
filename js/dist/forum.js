@@ -983,7 +983,7 @@ var MetaMaskButton = /*#__PURE__*/function (_Component) {
 
   _proto.handleConnect = /*#__PURE__*/function () {
     var _handleConnect = Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee() {
-      var eth, accounts, signature;
+      var eth, d, date, message, accounts, signature;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -999,22 +999,25 @@ var MetaMaskButton = /*#__PURE__*/function (_Component) {
               return _context.abrupt("return");
 
             case 4:
-              _context.next = 6;
+              d = new Date();
+              date = d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate();
+              message = "Please sign this message to connect to " + flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.forum.attribute('baseUrl') + " @ " + date;
+              _context.next = 9;
               return eth.request({
                 method: 'eth_requestAccounts'
               });
 
-            case 6:
+            case 9:
               accounts = _context.sent;
-              _context.next = 9;
+              _context.next = 12;
               return eth.request({
                 method: 'personal_sign',
-                params: [accounts[0], "Please sign this message to connect to " + flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.forum.attribute('baseUrl')]
+                params: [accounts[0], message]
               });
 
-            case 9:
+            case 12:
               signature = _context.sent;
-              _context.next = 12;
+              _context.next = 15;
               return flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.request({
                 url: flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.forum.attribute('apiUrl') + '/tokenjenny/web3/connect',
                 method: 'POST',
@@ -1024,7 +1027,7 @@ var MetaMaskButton = /*#__PURE__*/function (_Component) {
                 }
               });
 
-            case 12:
+            case 15:
             case "end":
               return _context.stop();
           }

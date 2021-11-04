@@ -18,12 +18,16 @@ export default class MetaMaskButton extends Component {
       return;
     }
 
+    const d = new Date();
+    const date = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
+    const message = `Please sign this message to connect to ${app.forum.attribute('baseUrl')} @ ${date}`;
+
     const accounts = await eth.request({ method: 'eth_requestAccounts' });
     const signature = await eth.request({
       method: 'personal_sign',
       params: [
         accounts[0],
-        `Please sign this message to connect to ${app.forum.attribute('baseUrl')}`,
+        message,
       ],
     });
 

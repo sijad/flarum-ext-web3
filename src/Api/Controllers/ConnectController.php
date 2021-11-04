@@ -40,8 +40,10 @@ class ConnectController implements RequestHandlerInterface
             $account = trim(Arr::get($body, 'account'));
 
             if (!empty($signature) && !empty($account)) {
+                $date = gmdate("Y-n-j");
+                $message = "Please sign this message to connect to " . $this->config['url'] . " @ " . $date;
                 $eth_sig_util = new EthSigRecover();
-                $signed = $eth_sig_util->personal_ecRecover("Please sign this message to connect to " . $this->config['url'], $signature);
+                $signed = $eth_sig_util->personal_ecRecover($message, $signature);
                 if ($signed === $account) {
                     $actor->web3_account = hex2bin(substr($account, 2));
                     $actor->save();

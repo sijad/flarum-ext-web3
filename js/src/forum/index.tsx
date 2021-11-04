@@ -6,15 +6,28 @@ import Button from 'flarum/common/components/Button';
 import MetaMaskButton from './components/MetaMaskButton';
 import LogInButtons from 'flarum/forum/components/LogInButtons';
 import LogInButton from './components/LogInButton';
+import User from 'flarum/common/models/User';
+import Model from 'flarum/common/Model';
 
 app.initializers.add('tokenjenny-web3', () => {
+  (User.prototype as any).web3Account = Model.attribute('web3Account');
+
   extend(
     SettingsPage.prototype,
     'accountItems',
-    function(items: ItemList) {
+    function(this: SettingsPage, items: ItemList) {
+      const account = this.user.web3Account();
       items.add(
         'metamask-connect',
-        <MetaMaskButton />
+        <MetaMaskButton
+          account={account}
+          onAccountChange={(web3Account: string) => {
+            this.user.pushAttributes({
+              web3Account,
+            });
+            m.redraw();
+          }}
+        />
       );
     }
   );

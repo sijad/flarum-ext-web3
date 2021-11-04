@@ -1056,12 +1056,16 @@ var MetaMaskButton = /*#__PURE__*/function (_Component) {
   _proto.view = function view() {
     var _this = this;
 
+    var account = this.attrs.account;
     return m(flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4___default.a, {
-      className: "Button",
+      className: "Button LogInButton--metamask",
+      icon: "fab fa-ethereum",
       onclick: function onclick() {
         return _this.handleConnect();
       }
-    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.translator.trans('tokenjenny-web3.forum.settings.connect_button'));
+    }, account ? flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.translator.trans('tokenjenny-web3.forum.settings.connected', {
+      account: account
+    }) : flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.translator.trans('tokenjenny-web3.forum.settings.connect_button'));
   };
 
   _proto.handleConnect = /*#__PURE__*/function () {
@@ -1084,11 +1088,14 @@ var MetaMaskButton = /*#__PURE__*/function (_Component) {
               });
 
             case 5:
+              this.attrs.onAccountChange(body.account);
+
+            case 6:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, this);
     }));
 
     function handleConnect() {
@@ -1124,6 +1131,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/forum/components/LogInButtons */ "flarum/forum/components/LogInButtons");
 /* harmony import */ var flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_LogInButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/LogInButton */ "./src/forum/components/LogInButton.tsx");
+/* harmony import */ var flarum_common_models_User__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! flarum/common/models/User */ "flarum/common/models/User");
+/* harmony import */ var flarum_common_models_User__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(flarum_common_models_User__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! flarum/common/Model */ "flarum/common/Model");
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Model__WEBPACK_IMPORTED_MODULE_7__);
+
+
 
 
 
@@ -1131,8 +1144,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default.a.initializers.add('tokenjenny-web3', function () {
+  flarum_common_models_User__WEBPACK_IMPORTED_MODULE_6___default.a.prototype.web3Account = flarum_common_Model__WEBPACK_IMPORTED_MODULE_7___default.a.attribute('web3Account');
   Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_forum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'accountItems', function (items) {
-    items.add('metamask-connect', m(_components_MetaMaskButton__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+    var _this = this;
+
+    var account = this.user.web3Account();
+    items.add('metamask-connect', m(_components_MetaMaskButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      account: account,
+      onAccountChange: function onAccountChange(web3Account) {
+        _this.user.pushAttributes({
+          web3Account: web3Account
+        });
+
+        m.redraw();
+      }
+    }));
   });
   Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a.prototype, 'items', function (items) {
     items.add('github', m(_components_LogInButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1230,6 +1256,17 @@ module.exports = flarum.core.compat['common/Component'];
 
 /***/ }),
 
+/***/ "flarum/common/Model":
+/*!*****************************************************!*\
+  !*** external "flarum.core.compat['common/Model']" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['common/Model'];
+
+/***/ }),
+
 /***/ "flarum/common/components/Button":
 /*!*****************************************************************!*\
   !*** external "flarum.core.compat['common/components/Button']" ***!
@@ -1249,6 +1286,17 @@ module.exports = flarum.core.compat['common/components/Button'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['common/extend'];
+
+/***/ }),
+
+/***/ "flarum/common/models/User":
+/*!***********************************************************!*\
+  !*** external "flarum.core.compat['common/models/User']" ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['common/models/User'];
 
 /***/ }),
 

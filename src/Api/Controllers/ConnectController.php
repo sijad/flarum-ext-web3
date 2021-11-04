@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TokenJenny\Web3\Api\Exception\InvalidSignatureException;
-use Pelieth\LaravelEcrecover\EthSigRecover;
+use Sijad\LaravelEcrecover\EthSigRecover;
 use Illuminate\Support\Arr;
 
 class ConnectController implements RequestHandlerInterface

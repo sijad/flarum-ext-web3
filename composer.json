@@ -14,7 +14,7 @@
     },
     "require": {
         "flarum/core": "^1.1",
-        "pelieth/laravel-ecrecover": "@dev"
+        "sijad/laravel-ecrecover": "^0.0.5"
     },
     "extra": {
         "flarum-extension": {

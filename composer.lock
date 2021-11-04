@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1458efe5c5c81fea740a7e1a3ac276ff",
+    "content-hash": "386553d94ec4f436487dd3fe68e7258b",
     "packages": [
         {
             "name": "axy/backtrace",
@@ -4313,45 +4313,6 @@
             "time": "2021-04-09T13:42:10+00:00"
         },
         {
-            "name": "pelieth/laravel-ecrecover",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pelith/laravel-ecrecover.git",
-                "reference": "b6effbd0e68f9ad38911591a7edcace261da5a3b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pelith/laravel-ecrecover/zipball/b6effbd0e68f9ad38911591a7edcace261da5a3b",
-                "reference": "b6effbd0e68f9ad38911591a7edcace261da5a3b",
-                "shasum": ""
-            },
-            "require": {
-                "kornrunner/keccak": "^1.0",
-                "php": ">=7.1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Pelieth\\LaravelEcrecover\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Ecrecover functions of Ethereum written for Laravel.",
-            "support": {
-                "issues": "https://github.com/pelith/laravel-ecrecover/issues",
-                "source": "https://github.com/pelith/laravel-ecrecover/tree/master"
-            },
-            "time": "2020-11-30T13:06:05+00:00"
-        },
-        {
             "name": "psr/container",
             "version": "1.1.1",
             "source": {
@@ -5152,6 +5113,41 @@
                 "source": "https://github.com/s9e/TextFormatter/tree/2.11.0"
             },
             "time": "2021-10-02T19:08:06+00:00"
+        },
+        {
+            "name": "sijad/laravel-ecrecover",
+            "version": "v0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sijad/laravel-ecrecover.git",
+                "reference": "5cac992a5646e59552d1d679d72cf1e7221ac3cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sijad/laravel-ecrecover/zipball/5cac992a5646e59552d1d679d72cf1e7221ac3cd",
+                "reference": "5cac992a5646e59552d1d679d72cf1e7221ac3cd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gmp": "*",
+                "kornrunner/keccak": "^1.0",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sijad\\LaravelEcrecover\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Ecrecover functions of Ethereum written for Laravel.",
+            "support": {
+                "source": "https://github.com/sijad/laravel-ecrecover/tree/v0.0.5"
+            },
+            "time": "2021-11-04T08:46:05+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7660,9 +7656,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "pelieth/laravel-ecrecover": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

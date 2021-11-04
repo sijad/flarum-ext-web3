@@ -1,6 +1,7 @@
 import Component from "flarum/common/Component";
 import Button from "flarum/common/components/Button";
 import app from 'flarum/forum/app';
+import sign from "../utils/sign";
 
 export default class MetaMaskButton extends Component {
   view() {
@@ -12,32 +13,11 @@ export default class MetaMaskButton extends Component {
   }
 
   async handleConnect() {
-    const eth = (window as any).ethereum;
-    if (!eth) {
-      alert('MetaMask not found!');
-      return;
-    }
-
-    const d = new Date();
-    const date = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
-    const message = `Please sign this message to connect to ${app.forum.attribute('baseUrl')} @ ${date}`;
-
-    const accounts = await eth.request({ method: 'eth_requestAccounts' });
-    const signature = await eth.request({
-      method: 'personal_sign',
-      params: [
-        accounts[0],
-        message,
-      ],
-    });
-
+    const body = await sign();
     await app.request({
       url: app.forum.attribute('apiUrl') + '/tokenjenny/web3/connect',
       method: 'POST',
-      body: {
-        signature,
-        account: accounts[0],
-      },
+      body,
     })
   }
 }

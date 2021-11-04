@@ -934,6 +934,87 @@ try {
 
 /***/ }),
 
+/***/ "./src/forum/components/LogInButton.tsx":
+/*!**********************************************!*\
+  !*** ./src/forum/components/LogInButton.tsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LogInButton; });
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/common/components/Button */ "flarum/common/components/Button");
+/* harmony import */ var flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_sign__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/sign */ "./src/forum/utils/sign.ts");
+
+
+
+
+
+
+
+var LogInButton = /*#__PURE__*/function (_Button) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(LogInButton, _Button);
+
+  function LogInButton() {
+    return _Button.apply(this, arguments) || this;
+  }
+
+  LogInButton.initAttrs = function initAttrs(attrs) {
+    attrs.className = (attrs.className || '') + ' LogInButton';
+    attrs.onclick = /*#__PURE__*/Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee() {
+      var body, payload;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return Object(_utils_sign__WEBPACK_IMPORTED_MODULE_5__["default"])();
+
+            case 2:
+              body = _context.sent;
+              _context.next = 5;
+              return flarum_forum_app__WEBPACK_IMPORTED_MODULE_3___default.a.request({
+                url: flarum_forum_app__WEBPACK_IMPORTED_MODULE_3___default.a.forum.attribute('apiUrl') + '/tokenjenny/web3/login',
+                method: 'POST',
+                body: body,
+                extract: function extract(resp) {
+                  var _ref2 = resp.match(/authenticationComplete\((.+?)\)/) || [],
+                      payload = _ref2[1];
+
+                  return payload;
+                }
+              });
+
+            case 5:
+              payload = _context.sent;
+              flarum_forum_app__WEBPACK_IMPORTED_MODULE_3___default.a.authenticationComplete(payload);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    _Button.initAttrs.call(this, attrs);
+  };
+
+  return LogInButton;
+}(flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4___default.a);
+
+
+
+/***/ }),
+
 /***/ "./src/forum/components/MetaMaskButton.tsx":
 /*!*************************************************!*\
   !*** ./src/forum/components/MetaMaskButton.tsx ***!
@@ -954,6 +1035,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_Button__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
 /* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_sign__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/sign */ "./src/forum/utils/sign.ts");
+
 
 
 
@@ -983,51 +1066,24 @@ var MetaMaskButton = /*#__PURE__*/function (_Component) {
 
   _proto.handleConnect = /*#__PURE__*/function () {
     var _handleConnect = Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee() {
-      var eth, d, date, message, accounts, signature;
+      var body;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              eth = window.ethereum;
+              _context.next = 2;
+              return Object(_utils_sign__WEBPACK_IMPORTED_MODULE_6__["default"])();
 
-              if (eth) {
-                _context.next = 4;
-                break;
-              }
-
-              alert('MetaMask not found!');
-              return _context.abrupt("return");
-
-            case 4:
-              d = new Date();
-              date = d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate();
-              message = "Please sign this message to connect to " + flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.forum.attribute('baseUrl') + " @ " + date;
-              _context.next = 9;
-              return eth.request({
-                method: 'eth_requestAccounts'
-              });
-
-            case 9:
-              accounts = _context.sent;
-              _context.next = 12;
-              return eth.request({
-                method: 'personal_sign',
-                params: [accounts[0], message]
-              });
-
-            case 12:
-              signature = _context.sent;
-              _context.next = 15;
+            case 2:
+              body = _context.sent;
+              _context.next = 5;
               return flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.request({
                 url: flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default.a.forum.attribute('apiUrl') + '/tokenjenny/web3/connect',
                 method: 'POST',
-                body: {
-                  signature: signature,
-                  account: accounts[0]
-                }
+                body: body
               });
 
-            case 15:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -1065,6 +1121,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
 /* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_MetaMaskButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/MetaMaskButton */ "./src/forum/components/MetaMaskButton.tsx");
+/* harmony import */ var flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/forum/components/LogInButtons */ "flarum/forum/components/LogInButtons");
+/* harmony import */ var flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_LogInButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/LogInButton */ "./src/forum/components/LogInButton.tsx");
+
+
 
 
 
@@ -1073,7 +1134,88 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default.a.initializers.add('tokenj
   Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_forum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'accountItems', function (items) {
     items.add('metamask-connect', m(_components_MetaMaskButton__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   });
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_forum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a.prototype, 'items', function (items) {
+    items.add('github', m(_components_LogInButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      className: "Button LogInButton--metamask",
+      icon: "fab fa-ethereum"
+    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default.a.translator.trans('tokenjenny-web3.forum.log_in.with_metamask_button')));
+  });
 });
+
+/***/ }),
+
+/***/ "./src/forum/utils/sign.ts":
+/*!*********************************!*\
+  !*** ./src/forum/utils/sign.ts ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return sign; });
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+function sign() {
+  return _sign.apply(this, arguments);
+}
+
+function _sign() {
+  _sign = Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
+    var eth, d, date, message, accounts, signature;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            eth = window.ethereum;
+
+            if (eth) {
+              _context.next = 4;
+              break;
+            }
+
+            alert('MetaMask not found!');
+            return _context.abrupt("return");
+
+          case 4:
+            d = new Date();
+            date = d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate();
+            message = "Please sign this message to connect to " + flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default.a.forum.attribute('baseUrl') + " @ " + date;
+            _context.next = 9;
+            return eth.request({
+              method: 'eth_requestAccounts'
+            });
+
+          case 9:
+            accounts = _context.sent;
+            _context.next = 12;
+            return eth.request({
+              method: 'personal_sign',
+              params: [accounts[0], message]
+            });
+
+          case 12:
+            signature = _context.sent;
+            return _context.abrupt("return", {
+              account: accounts[0],
+              signature: signature
+            });
+
+          case 14:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _sign.apply(this, arguments);
+}
 
 /***/ }),
 
@@ -1118,6 +1260,17 @@ module.exports = flarum.core.compat['common/extend'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['forum/app'];
+
+/***/ }),
+
+/***/ "flarum/forum/components/LogInButtons":
+/*!**********************************************************************!*\
+  !*** external "flarum.core.compat['forum/components/LogInButtons']" ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['forum/components/LogInButtons'];
 
 /***/ }),
 

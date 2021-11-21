@@ -20,4 +20,7 @@ return [
 
     (new Extend\ApiSerializer(BasicUserSerializer::class))
         ->attributes(UserAttributes::class),
+
+    (new Extend\User())
+        ->registerPreference('discloseWeb3Address', 'boolval', true),
 ];

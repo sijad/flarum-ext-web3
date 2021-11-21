@@ -8,6 +8,7 @@ import LogInButtons from 'flarum/forum/components/LogInButtons';
 import LogInButton from './components/LogInButton';
 import User from 'flarum/common/models/User';
 import Model from 'flarum/common/Model';
+import Switch from 'flarum/common/components/Switch';
 
 app.initializers.add('tokenjenny-web3', () => {
   (User.prototype as any).web3Account = Model.attribute('web3Account');
@@ -28,6 +29,31 @@ app.initializers.add('tokenjenny-web3', () => {
             m.redraw();
           }}
         />
+      );
+    }
+  );
+
+  extend(
+    SettingsPage.prototype,
+    'privacyItems',
+    function(this: SettingsPage & {discloseWeb3AddressLoading: boolean}, items: ItemList) {
+      items.add(
+        'discloseWeb3Address',
+        <Switch
+          state={this.user.preferences().discloseWeb3Address}
+          onchange={(value: boolean) => {
+            this.discloseWeb3AddressLoading = true;
+            m.redraw();
+
+            this.user.savePreferences({ discloseWeb3Address: value }).then(() => {
+              this.discloseWeb3AddressLoading = false;
+              m.redraw();
+            });
+          }}
+          loading={this.discloseWeb3AddressLoading}
+        >
+          {app.translator.trans('tokenjenny-web3.forum.settings.privacy_disclose_web3_address_label')}
+        </Switch>
       );
     }
   );

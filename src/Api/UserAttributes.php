@@ -17,7 +17,7 @@ class UserAttributes
     {
         $actor = $serializer->getActor();
 
-        if ($actor->id === $model->id) {
+        if ($model->getPreference('discloseWeb3Address') || $actor->id === $model->id) {
             $provider = $model->loginProviders()
                   ->where('provider', 'web3')
                   ->first();

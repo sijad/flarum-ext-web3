@@ -38,8 +38,10 @@ class ConnectController implements RequestHandlerInterface
             $body = $request->getParsedBody();
             $signature = trim(Arr::get($body, 'signature'));
             $account = trim(Arr::get($body, 'account'));
+            $method = trim(Arr::get($body, 'method'));
 
             if (!empty($signature) && !empty($account)) {
+              if ($method === 'metamask') {
                 $signed = Sign::personalRecover($signature, $this->config['url']);
                 if ($signed === $account) {
                     $actor->loginProviders()->updateOrCreate(
@@ -49,6 +51,7 @@ class ConnectController implements RequestHandlerInterface
 
                     return new EmptyResponse;
                 }
+              }
             }
         }
 

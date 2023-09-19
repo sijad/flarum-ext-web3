@@ -4,7 +4,6 @@ namespace TokenJenny\Web3\Api\Controllers;
 
 use Exception;
 use Flarum\Foundation\Config;
-use Flarum\Http\RequestUtil;
 use Flarum\Forum\Auth\Registration;
 use Flarum\Forum\Auth\ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
@@ -42,8 +41,10 @@ class LoginController implements RequestHandlerInterface
         $body = $request->getParsedBody();
         $signature = trim(Arr::get($body, 'signature'));
         $account = trim(Arr::get($body, 'account'));
+        $method = trim(Arr::get($body, 'method'));
 
         if (!empty($signature) && !empty($account)) {
+          if ($method === 'metamask') {
             $signed = Sign::personalRecover($signature, $this->config['url']);
             if ($signed === $account) {
                 return $this->response->make(
@@ -55,6 +56,7 @@ class LoginController implements RequestHandlerInterface
                     }
                 );
             }
+          }
         }
 
         throw new Exception('Invalid state');

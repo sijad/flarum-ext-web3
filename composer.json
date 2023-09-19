@@ -1,29 +1,33 @@
 {
-    "name": "tokenjenny/flarum-ext-web3",
-    "description": "Allow Flarum to interact with Web3",
-    "type": "flarum-extension",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "TJ",
-            "email": "info@tokenjenny.one"
-        }
-    ],
-    "autoload": {
-        "psr-4": { "TokenJenny\\Web3\\": "src/" }
-    },
-    "require": {
-        "flarum/core": "^1.1",
-        "sijad/laravel-ecrecover": "^0.0.5"
-    },
-    "extra": {
-        "flarum-extension": {
-            "title": "Web3",
-            "icon": {
-                "name": "fab fa-ethereum",
-                "backgroundColor": "#fbbf24",
-                "color": "#fff"
-            }
-        }
+  "name": "tokenjenny/flarum-ext-web3",
+  "description": "Allow Flarum to interact with Web3",
+  "type": "flarum-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "sijad",
+      "email": "hi@hashemian.me"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "TokenJenny\\Web3\\": "src/"
+    }
+  },
+  "require": {
+    "flarum/core": "^1.1",
+    "sijad/laravel-ecrecover": "^0.0.5",
+    "stephenhill/base58": "^1.1",
+    "gmajor/sr25519-bindings": "*@dev"
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Web3",
+      "icon": {
+        "name": "fab fa-ethereum",
+        "backgroundColor": "#fbbf24",
+        "color": "#fff"
+      }
+    }
+  }
 }

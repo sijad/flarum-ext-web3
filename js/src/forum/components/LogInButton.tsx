@@ -1,11 +1,11 @@
 import app from 'flarum/forum/app';
 import Button from "flarum/common/components/Button";
-import RequestError from "flarum/common/utils/RequestError";
 import sign from '../utils/sign';
 
 interface LogInButtonProps {
   className?: string;
   onclick?: () => void;
+  method: 'metamask';
 }
 
 export default class LogInButton extends Button {
@@ -13,7 +13,7 @@ export default class LogInButton extends Button {
     attrs.className = (attrs.className || '') + ' LogInButton';
 
     attrs.onclick = async function () {
-      const body = await sign();
+      const body = await sign(attrs.method);
       const payload = await app.request({
         url: app.forum.attribute('apiUrl') + '/tokenjenny/web3/login',
         method: 'POST',
@@ -29,4 +29,3 @@ export default class LogInButton extends Button {
     super.initAttrs(attrs);
   }
 }
-

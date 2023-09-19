@@ -3,12 +3,13 @@ import SettingsPage from 'flarum/forum/components/SettingsPage';
 import app from 'flarum/forum/app';
 import ItemList from 'flarum/common/utils/ItemList';
 import Button from 'flarum/common/components/Button';
-import MetaMaskButton from './components/MetaMaskButton';
 import LogInButtons from 'flarum/forum/components/LogInButtons';
-import LogInButton from './components/LogInButton';
 import User from 'flarum/common/models/User';
 import Model from 'flarum/common/Model';
 import Switch from 'flarum/common/components/Switch';
+
+import LogInButton from './components/LogInButton';
+import MetaMaskButton from './components/MetaMaskButton';
 
 app.initializers.add('tokenjenny-web3', () => {
   (User.prototype as any).web3Account = Model.attribute('web3Account');
@@ -62,10 +63,11 @@ app.initializers.add('tokenjenny-web3', () => {
     LogInButtons.prototype,
     'items',
     function(items: ItemList) {
-      items.add('github',
+      items.add('metamask',
         <LogInButton
           className="Button LogInButton--metamask"
           icon="fab fa-ethereum"
+          method="metamask"
         >
           {app.translator.trans('tokenjenny-web3.forum.log_in.with_metamask_button')}
         </LogInButton>

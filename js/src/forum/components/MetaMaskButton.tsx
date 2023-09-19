@@ -25,7 +25,7 @@ export default class MetaMaskButton extends Component<MetaMaskButtonProps> {
   }
 
   async handleConnect() {
-    const body = await sign();
+    const body = await sign('metamask');
 
     await app.request({
       url: app.forum.attribute('apiUrl') + '/tokenjenny/web3/connect',

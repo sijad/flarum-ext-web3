@@ -6,6 +6,7 @@ use Exception;
 use Flarum\Foundation\Config;
 use Flarum\Forum\Auth\Registration;
 use Flarum\Forum\Auth\ResponseFactory;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -25,12 +26,18 @@ class LoginController implements RequestHandlerInterface
     protected $response;
 
     /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+    /**
      * @param Config $config
      */
-    public function __construct(Config $config, ResponseFactory $response)
+    public function __construct(Config $config, ResponseFactory $response, SettingsRepositoryInterface $settings)
     {
         $this->response = $response;
         $this->config = $config;
+        $this->settings = $settings;
     }
 
     /**
@@ -43,6 +50,8 @@ class LoginController implements RequestHandlerInterface
         $account = trim(Arr::get($body, 'account'));
         $method = trim(Arr::get($body, 'method'));
 
+        $no_email = !!$this->settings->get('tokenjenny-web3.signup-without-email');
+
         if (!empty($signature) && !empty($account)) {
           if ($method === 'metamask') {
             $signed = Sign::personalRecover($signature, $this->config['url']);
@@ -50,7 +59,13 @@ class LoginController implements RequestHandlerInterface
                 return $this->response->make(
                     'web3',
                     $account,
-                    function (Registration $registration) {
+                    function (Registration $registration) use ($no_email, $account) {
+                        if ($no_email === true) {
+                          $email = "$account@web3";
+
+                          $registration->provideTrustedEmail($email);
+                        }
+
                         $registration
                             ->setPayload([]);
                     }

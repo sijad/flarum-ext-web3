@@ -1,4 +1,7 @@
 tokenjenny-web3:
+  admin:
+    settings:
+      signup_without_email: Allow Singup Without Email
   forum:
     settings:
       connect_button: Connect To MetaMask

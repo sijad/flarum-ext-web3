@@ -23,7 +23,8 @@ export default class LogInButton extends Button {
           return payload;
         },
       });
-      app.authenticationComplete(payload);
+
+      app.authenticationComplete({isWeb3: !!payload.email, ...payload});
     };
 
     super.initAttrs(attrs);

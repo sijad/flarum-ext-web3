@@ -1,8 +1,8 @@
-import { extend } from 'flarum/common/extend';
+import { extend, override } from 'flarum/common/extend';
 import SettingsPage from 'flarum/forum/components/SettingsPage';
 import app from 'flarum/forum/app';
+import SignUpModal from 'flarum/forum/components/SignUpModal';
 import ItemList from 'flarum/common/utils/ItemList';
-import Button from 'flarum/common/components/Button';
 import LogInButtons from 'flarum/forum/components/LogInButtons';
 import User from 'flarum/common/models/User';
 import Model from 'flarum/common/Model';
@@ -31,6 +31,14 @@ app.initializers.add('tokenjenny-web3', () => {
           }}
         />
       );
+    }
+  );
+
+  override(
+    SignUpModal.prototype,
+    'className',
+    function(original) {
+      return `${original()} ${this.attrs.isWeb3 ? ' SignUpModal--no-email' : ''}`
     }
   );
 

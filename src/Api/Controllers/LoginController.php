@@ -61,7 +61,7 @@ class LoginController implements RequestHandlerInterface
                     $account,
                     function (Registration $registration) use ($no_email, $account) {
                         if ($no_email === true) {
-                          $email = "$account@web3";
+                          $email = strtolower(substr($account, 2)) . "@noreply.web3";
 
                           $registration->provideTrustedEmail($email);
                         }
